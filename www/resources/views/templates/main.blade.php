@@ -18,6 +18,14 @@
     </head>
     <body class="antialiased">
         <div>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.users.index') }}">User</a>
+                </li>
+            </ul>
             @if (Route::has('login'))
                 <div>
                     @auth
