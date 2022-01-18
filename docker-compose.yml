@@ -1,0 +1,58 @@
+version: "3"
+services:
+  www:
+    build:
+      context: ./apache-php
+      args:
+        - WITH_XDEBUG=${WITH_XDEBUG}
+    ports:
+      - "8168:80"
+    env_file: .env
+    environment:
+      XDEBUG_CONFIG: "remote_host=localhost remote_connect_back=1"
+      PHP_IDE_CONFIG: "serverName=localhost"
+    volumes:
+      - ./www:/var/www/html:z
+      - ./www/public:/var/www/html/public:z
+    links:
+      - db
+    networks:
+      - default
+  db:
+    image: mysql
+    ports:
+      - "3368:3306"
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ./dump:/docker-entrypoint-initdb.d
+      - persistent:/var/lib/mysql
+    networks:
+      - default
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - db:db
+    ports:
+      - 8169:80
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  redis:
+    image: "redis:alpine"
+    command: redis-server
+    ports:
+      - "6379:6379"
+    networks:
+      - default
+
+volumes:
+  persistent:
+
+networks:
+  default:
+    driver: bridge
