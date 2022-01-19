@@ -18,9 +18,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-//        if(! Gate::allows('is-admin')) {
-//            dd('You are not admin');
-//        }
         $currentPage = request()->get('page',0);
         $items = 10;
         $users = Cache::remember('users-' . $currentPage, 10000, function() use ($items, $currentPage) {
