@@ -56,6 +56,11 @@
                                 <a class="nav-link" href="{{ route('admin.users.index') }}">User</a>
                             </li>
                         @endcan
+                        @can('is-user')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.urls.index') }}">Url</a>
+                            </li>
+                        @endcan
                     </ul>
                 </div>
             </div>

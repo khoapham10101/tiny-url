@@ -18,7 +18,7 @@ class UrlFactory extends Factory
             'short_url' => $this->random_strings(7),
             'long_url' => $this->faker->url(),
             'hits' => rand(0,10),
-            'user_id' => 8
+            'user_id' => 32110
         ];
     }
 
