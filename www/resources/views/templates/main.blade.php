@@ -45,6 +45,7 @@
             @endif
         </div>
         <main class="container">
+            @include('partials.alerts')
             @yield('content')
         </main>
     </body>

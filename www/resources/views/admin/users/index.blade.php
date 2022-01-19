@@ -21,6 +21,14 @@
                     <td>{{ $user->email }}</td>
                     <td>
                         <a class="btn btn-primary btn-sm" href="{{ route('admin.users.edit', $user->id) }}">Edit</a>
+                        <button class="btn btn-danger btn-sm" href="{{ route('admin.users.edit', $user->id) }}"
+                            onclick="event.preventDefault(); document.getElementById('delete-user-form-{{ $user->id }}').submit();"
+                        >Delete</button>
+
+                        <form id="delete-user-form-{{ $user->id }}" action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display:none">
+                            @csrf
+                            @method("DELETE")
+                        </form>
                     </td>
                 </tr>
             @endforeach
