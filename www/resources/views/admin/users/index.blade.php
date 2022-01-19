@@ -20,7 +20,6 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>
-                        <a class="btn btn-primary btn-sm" href="{{ route('admin.users.edit', $user->id) }}">Edit</a>
                         <button class="btn btn-danger btn-sm" href="{{ route('admin.users.destroy', $user->id) }}"
                             onclick="event.preventDefault(); document.getElementById('delete-user-form-{{ $user->id }}').submit();"
                         >Delete</button>

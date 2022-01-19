@@ -22,6 +22,7 @@
                     <td>{{ $url->short_url }}</td>
                     <td>{{ $url->hits }}</td>
                     <td>
+                        <a class="btn btn-info btn-sm" href="{{ route('user.urls.show', $url->id) }}">View</a>
                         <a class="btn btn-primary btn-sm" href="{{ route('user.urls.edit', $url->id) }}">Edit</a>
                         <button class="btn btn-danger btn-sm" href="{{ route('user.urls.destroy', $url->id) }}"
                             onclick="event.preventDefault(); document.getElementById('delete-url-form-{{ $url->id }}').submit();"

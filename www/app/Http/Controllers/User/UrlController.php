@@ -73,7 +73,8 @@ class UrlController extends Controller
      */
     public function show($id)
     {
-        //
+        $url = Url::find($id);
+        return view('user.urls.show', ['url' => $url]);
     }
 
     /**
