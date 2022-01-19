@@ -23,8 +23,8 @@
                     <td>{{ $url->hits }}</td>
                     <td>
                         <a class="btn btn-primary btn-sm" href="{{ route('user.urls.edit', $url->id) }}">Edit</a>
-                        <button class="btn btn-danger btn-sm" href="{{ route('admin.users.destroy', $url->id) }}"
-                            onclick="event.preventDefault(); document.getElementById('delete-user-form-{{ $url->id }}').submit();"
+                        <button class="btn btn-danger btn-sm" href="{{ route('user.urls.destroy', $url->id) }}"
+                            onclick="event.preventDefault(); document.getElementById('delete-url-form-{{ $url->id }}').submit();"
                         >Delete</button>
 
                         <form id="delete-url-form-{{ $url->id }}" action="{{ route('user.urls.destroy', $url->id) }}" method="POST" style="display:none">

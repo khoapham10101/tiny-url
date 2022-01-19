@@ -50,13 +50,12 @@ class UrlController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'long_url' => 'required',
-            'short_url' => 'required'
+            'long_url' => 'required'
 
         ]);
         $url = Url::create(
             [
-                'short_url' => 'XzdVA82',
+                'short_url' => 'XzdVA85',
                 'long_url' => $request->long_url,
                 'hits' => 0,
                 'user_id' => $request->user()->id
@@ -113,8 +112,10 @@ class UrlController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        Url::destroy($id);
+        $request->session()->flash('success', 'You have deleted the url.');
+        return redirect(route('user.urls.index'));
     }
 }
