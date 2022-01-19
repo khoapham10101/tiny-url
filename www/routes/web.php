@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\User\UrlController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,7 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
     Route::resource('/users', UserController::class);
 });
 
+// User routes
+Route::prefix('user')->middleware(['auth'])->name('user.')->group(function() {
+    Route::resource('/urls', UrlController::class);
+});

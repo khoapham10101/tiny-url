@@ -18,11 +18,12 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $currentPage = request()->get('page',0);
-        $items = 10;
-        $users = Cache::remember('users-' . $currentPage, 10000, function() use ($items, $currentPage) {
-            return User::skip($currentPage * $items)->paginate($items);
-        });
+//        $currentPage = request()->get('page',0);
+//        $items = 10;
+//        $users = Cache::remember('users-' . $currentPage, 10000, function() use ($items, $currentPage) {
+//            return User::skip($currentPage * $items)->paginate($items);
+//        });
+        $users = User::paginate(10);
         return view('admin.users.index')->with(
             [
             'users' => $users

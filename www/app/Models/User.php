@@ -74,4 +74,9 @@ class User extends Authenticatable
     {
         return null !== $this->roles()->whereIn('name', $role)->first();
     }
+
+    public function urls()
+    {
+        return $this->hasMany('App\Models\Url');
+    }
 }
