@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Url;
+use App\Http\Controllers\User\UrlApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->prefix('v1')->group(function() {
+    Route::get('/user', function(Request $request){
+        return $request->user();
+    });
+//    Route::get('/urls', function(Request $request){
+////        dd($request);
+//        return Url::paginate(10);
+//    });
+    Route::get('urls', [UrlApiController::class, 'index']);
+    Route::get('urls/{id}', [UrlApiController::class, 'show']);
 });
