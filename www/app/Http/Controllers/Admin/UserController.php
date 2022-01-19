@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\User;
-//use Illuminate\Http;
+use App\Models\Role;
 
 class UserController extends Controller
 {
@@ -22,7 +22,6 @@ class UserController extends Controller
         $users = Cache::remember('users-' . $currentPage, 10000, function() use ($items, $currentPage) {
             return User::skip($currentPage * $items)->paginate($items);
         });
-
         return view('admin.users.index')->with(
             [
             'users' => $users
@@ -38,7 +37,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.create',['roles' => Role::all()]);
     }
 
     /**
@@ -49,7 +48,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd($request->roles);
+        $user = User::create($request->except(['_token', 'roles']));
+        $user->roles()->sync($request->roles);
+        return redirect(route('admin.users.index'));
     }
 
     /**

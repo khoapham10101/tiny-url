@@ -2,6 +2,7 @@
 @section('content')
     <h1>User</h1>
 
+    <a class="btn btn-success btn-sm" href="{{ route('admin.users.create') }}">Create</a>
     <div class="card">
         <table class="table">
             <thead>
