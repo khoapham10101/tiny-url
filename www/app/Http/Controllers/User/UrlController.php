@@ -15,21 +15,32 @@ class UrlController extends Controller
      */
     public function index(Request $request)
     {
-//        dd($request->user()->roles());
-//        $roles = $request->user()->roles();
-//        dd($roles);
-//        foreach($roles as $role) {
-//            print_r($role);
-//        }
-//        dd(1);
-        $user_id = $request->user()->id;
-        $urls = Url::where('user_id', $user_id)->paginate(10);
+//        $user_id = $request->user()->id;
+        $user_id = 32110;
+        $urls = Url::sortable()->where('user_id', $user_id)->paginate(10);
+
         return view('user.urls.index')->with(
             [
                 'urls' => $urls
             ]
         );
     }
+
+//    /**
+//     * Display a listing of all the resource.
+//     *
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function all(Request $request)
+//    {
+//        $urls = Url::paginate(10);
+//
+//        return view('user.urls.index')->with(
+//            [
+//                'urls' => $urls
+//            ]
+//        );
+//    }
 
     /**
      * Show the form for creating a new resource.
@@ -55,7 +66,7 @@ class UrlController extends Controller
         ]);
         $url = Url::create(
             [
-                'short_url' => 'XzdVA85',
+                'short_url' => 'XzdVA87',
                 'long_url' => $request->long_url,
                 'hits' => 0,
                 'user_id' => $request->user()->id

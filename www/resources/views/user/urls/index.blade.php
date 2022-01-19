@@ -4,10 +4,10 @@
 
     <a class="btn btn-success btn-sm" href="{{ route('user.urls.create') }}">Create</a>
     <div class="card">
-        <table class="table">
+        <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">#Id</th>
+                <th scope="col">@sortablelink('id', 'ID')</th>
                 <th scope="col">Full Url</th>
                 <th scope="col">Short Url</th>
                 <th scope="col">Hits</th>
@@ -15,9 +15,14 @@
             </tr>
             </thead>
             <tbody>
+            @if ($urls->count() == 0)
+                <tr>
+                    <td colspan="5">No urls to display.</td>
+                </tr>
+            @endif
             @foreach($urls as $url)
                 <tr>
-                    <th scope="row">{{ $url->id }}</th>
+                    <th scope="row"><a class="link-info" href="{{ route('user.urls.show', $url->id) }}">{{ $url->id }}</a></th>
                     <td>{{ $url->long_url }}</td>
                     <td>{{ $url->short_url }}</td>
                     <td>{{ $url->hits }}</td>
@@ -37,6 +42,10 @@
             @endforeach
             </tbody>
         </table>
-        {{ $urls->links() }}
+
+        <p>
+            Displaying {{$urls->count()}} of {{ $urls->total() }} url(s).
+        </p>
+        {!! $urls->appends(Request::except('page'))->render() !!}
     </div>
 @endsection

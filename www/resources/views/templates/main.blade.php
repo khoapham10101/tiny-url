@@ -27,7 +27,7 @@
                     @if (Route::has('login'))
                         <div>
                             @auth
-                                <a href="{{ url('/home') }}">Home</a>
+                                <a href="{{ url('/') }}">Home</a>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                                 <form style="display:none" method="POST" action="{{ route('logout') }}" id="logout-form">
                                     @csrf
@@ -49,18 +49,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
+                            <a class="nav-link" href="/">Home</a>
                         </li>
-                        @can('is-admin')
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.users.index') }}">User</a>
-                            </li>
-                        @endcan
-                        @can('is-user')
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.urls.index') }}">Url</a>
-                            </li>
-                        @endcan
+                        @if (Route::has('login'))
+                            @can('is-admin')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.users.index') }}">User</a>
+                                </li>
+                                <li class="nav-item">
+{{--                                    <a class="nav-link" href="{{ route('user.urls.all') }}">All Urls</a>--}}
+                                </li>
+                            @endcan
+                            @can('is-user')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('user.urls.index') }}">My Urls</a>
+                                </li>
+                            @endcan
+                        @endif
                     </ul>
                 </div>
             </div>
