@@ -15,8 +15,8 @@ class UrlController extends Controller
      */
     public function index(Request $request)
     {
-//        $user_id = $request->user()->id;
-        $user_id = 32110;
+        $user_id = $request->user()->id;
+//        $user_id = 32110;
         $urls = Url::sortable()->where('user_id', $user_id)->paginate(10);
 
         return view('user.urls.index')->with(
