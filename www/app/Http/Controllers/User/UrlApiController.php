@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Url;
+use App\Http\Resources\UrlsResource;
 
 class UrlApiController extends Controller
 {
@@ -45,14 +46,12 @@ class UrlApiController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return response()->json([
-            'data' => Url::find($id)
-        ]);
+        return new UrlsResource(Url::find($id));
     }
 
     /**

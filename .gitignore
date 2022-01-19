@@ -5,7 +5,6 @@ www/.gitattributes
 www/.gitignore
 www/.styleci.yml
 www/README.md
-www/app/
 www/artisan
 www/bootstrap/
 www/config/
