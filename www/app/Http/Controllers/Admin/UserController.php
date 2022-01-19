@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -15,8 +16,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+//        if(! Gate::allows('is-admin')) {
+//            dd('You are not admin');
+//        }
         $currentPage = request()->get('page',0);
         $items = 10;
         $users = Cache::remember('users-' . $currentPage, 10000, function() use ($items, $currentPage) {
@@ -50,6 +54,7 @@ class UserController extends Controller
     {
         $user = User::create($request->except(['_token', 'roles']));
         $user->roles()->sync($request->roles);
+        $request->session()->flash('success', 'You have created new user.');
         return redirect(route('admin.users.index'));
     }
 

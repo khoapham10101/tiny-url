@@ -17,33 +17,49 @@
 
     </head>
     <body class="antialiased">
-        <div>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.users.index') }}">User</a>
-                </li>
-            </ul>
-            @if (Route::has('login'))
-                <div>
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-                        <form style="display:none" method="POST" action="{{ route('logout') }}" id="logout-form">
-                            @csrf
-                        </form>
-                    @else
-                        <a href="{{ route('login') }}">Log in</a>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="#">{{ config('app.name', 'User Management System ') }}</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="form-inline my-2 my-lg-0">
+                    @if (Route::has('login'))
+                        <div>
+                            @auth
+                                <a href="{{ url('/home') }}">Home</a>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
+                                <form style="display:none" method="POST" action="{{ route('logout') }}" id="logout-form">
+                                    @csrf
+                                </form>
+                            @else
+                                <a href="{{ route('login') }}">Log in</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}">Register</a>
+                                @endif
+                            @endauth
+                        </div>
+                    @endif
                 </div>
-            @endif
-        </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        @can('is-admin')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.users.index') }}">User</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <main class="container">
             @include('partials.alerts')
             @yield('content')
