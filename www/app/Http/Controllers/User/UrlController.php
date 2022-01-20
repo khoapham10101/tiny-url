@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helper\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Url;
 use Illuminate\Http\Request;
@@ -66,7 +67,7 @@ class UrlController extends Controller
         ]);
         $url = Url::create(
             [
-                'short_url' => 'XzdVA87',
+                'short_url' => Helpers::shorten_strings(Helpers::LENGTH),
                 'long_url' => $request->long_url,
                 'hits' => 0,
                 'user_id' => $request->user()->id
