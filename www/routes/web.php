@@ -16,9 +16,7 @@ use App\Http\Controllers\User\RedirectController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', '\App\Http\Controllers\User\UrlController@create');
 
 // Admin routes
 Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->group(function() {
