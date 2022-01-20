@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Helper\Helpers;
 use App\Http\Controllers\Controller;
+use App\Jobs\UrlPingJob;
 use App\Models\Url;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -23,6 +24,11 @@ class RedirectController extends Controller
                 return Url::findOneByPath($path)->long_url;
             });
             if ($url) {
+                UrlPingJob::dispatch([
+                    'function' => 'updateHit',
+                    'short_url' => $path
+                ]);
+
                 return redirect($url, 301);
             }
         }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Helper\Helpers;
 use App\Http\Controllers\Controller;
+use App\Jobs\UrlPingJob;
 use App\Models\Url;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -19,7 +20,6 @@ class UrlController extends Controller
     {
         $user_id = $request->user()->id;
         $urls = Url::sortable()->where('user_id', $user_id)->paginate(10);
-
         return view('user.urls.index')->with(
             [
                 'urls' => $urls

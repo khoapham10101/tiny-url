@@ -16,6 +16,7 @@ services:
       - ./www/public:/var/www/html/public:z
     links:
       - db
+      - rabbitmq
     networks:
       - default
   db:
@@ -49,16 +50,6 @@ services:
       - "6379:6379"
     networks:
       - default
-
-#  rabbitmq:
-#    image: rabbitmq:3-management-alpine
-#    environment:
-#      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_DEFAULT_VHOST}
-#    ports:
-#      - 5672:5672
-#      - 15672:15672
-#    networks:
-#      - default
 
   rabbitmq:
     build:

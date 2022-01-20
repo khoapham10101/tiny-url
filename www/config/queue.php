@@ -70,6 +70,7 @@ return [
             'block_for' => null,
             'after_commit' => false,
         ],
+
         'rabbitmq' => [
 
             'driver' => 'rabbitmq',
@@ -96,7 +97,6 @@ return [
                 ],
                 'queue' => [
                     'job' => VladimirYuldashev\LaravelQueueRabbitMQ\Queue\Jobs\RabbitMQJob::class,
-                    // 'job' => App\Jobs\CustomHandleJob::class,
                 ],
             ],
 
