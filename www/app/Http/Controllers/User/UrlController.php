@@ -67,7 +67,7 @@ class UrlController extends Controller
         ]);
         $url = Url::create(
             [
-                'short_url' => Helpers::shorten_strings(Helpers::LENGTH),
+                'short_url' => Helpers::generate(Helpers::LENGTH),
                 'long_url' => $request->long_url,
                 'hits' => 0,
                 'user_id' => $request->user()->id

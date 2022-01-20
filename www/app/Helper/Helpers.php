@@ -2,18 +2,34 @@
 
 namespace App\Helper;
 
+use App\Models\Url;
 /**
  * Auto generate shorten urls.
  */
 class Helpers {
 
     const LENGTH = 7;
+
     /**
-     * @return int
+     * @param $len
+     * @return false|string
      */
-    static function shorten_strings($len)
+    static function generate($len)
     {
-        $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-        return substr(str_shuffle($str_result), 0, $len);
+        $str_default = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        $str_result = substr(str_shuffle($str_default), 0, $len);
+        if (self::validate($str_result)) {
+            return self::generate($len);
+        }
+        return $str_result;
+    }
+
+    /**
+     * @param $string
+     * @return mixed
+     */
+    static function validate($string)
+    {
+        return Url::where('short_url', $string)->first();
     }
 }
