@@ -85,7 +85,11 @@ class UrlApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $url = Url::find($id);
+        $url->update([
+           'long_url' => $request->long_url
+        ]);
+        return new UrlsResource($url);
     }
 
     /**
@@ -96,6 +100,7 @@ class UrlApiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Url::destroy($id);
+        return response(null, 204);
     }
 }
