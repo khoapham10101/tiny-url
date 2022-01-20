@@ -37,7 +37,7 @@ jobs:
           restore-keys: "php-${{ matrix.php-version }}-composer-locked-"
 
       - name: "Install dependencies with Composer"
-        run: "composer install"
+        run: "cd www && composer install"
 
       - name: "Create report folder for PHPCS"
         run: "mkdir -p phpcs_report"
