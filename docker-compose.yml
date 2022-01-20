@@ -21,6 +21,7 @@ services:
       - default
   db:
     image: mysql
+    restart: unless-stopped
     ports:
       - "3368:3306"
     environment:
@@ -29,8 +30,9 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-      - ./dump:/docker-entrypoint-initdb.d
-      - persistent:/var/lib/mysql
+      - ./dump:/docker-entrypoint-initdb.d:rw
+      - ./storage:/var/lib/mysql:rw
+#      - persistent:/var/lib/mysql:rw
     networks:
       - default
   phpmyadmin:
