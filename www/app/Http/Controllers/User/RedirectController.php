@@ -6,6 +6,7 @@ use App\Helper\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Url;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class RedirectController extends Controller
 {
@@ -18,9 +19,11 @@ class RedirectController extends Controller
     {
         $path = $request->path();
         if(Helpers::LENGTH == strlen($path)) {
-            $url = Url::findOneByPath($path);
+            $url = Cache::rememberForever($path, function() use ($path) {
+                return Url::findOneByPath($path)->long_url;
+            });
             if ($url) {
-                return redirect($url->long_url, 301);
+                return redirect($url, 301);
             }
             return response(null, 404);
         }

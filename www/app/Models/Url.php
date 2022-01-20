@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helper\Helpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -40,15 +41,19 @@ class Url extends Model
     }
 
     public function findOneByUser($id, Request $request) {
-        return self::select('*')
+        $url = self::select('*')
             ->where('id', '=', $id)
             ->where('user_id', '=', $request->user()->id)
             ->first();
+        Helpers::rememberForever($url->short_url, $url->long_url);
+        return $url;
     }
 
     public function findOneByPath($path) {
-        return self::select('*')
+        $url = self::select('*')
             ->where('short_url', '=', $path)
             ->first();
+        Helpers::rememberForever($url->short_url, $url->long_url);
+        return $url;
     }
 }

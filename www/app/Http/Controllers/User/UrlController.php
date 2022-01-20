@@ -6,6 +6,7 @@ use App\Helper\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Url;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class UrlController extends Controller
 {
@@ -57,6 +58,7 @@ class UrlController extends Controller
                 'user_id' => $request->user()->id
             ]
         );
+        Helpers::rememberForever($url->short_url);
         $request->session()->flash('success', 'You have created new url.');
         return redirect(route('user.urls.index'));
     }
@@ -99,7 +101,7 @@ class UrlController extends Controller
         ]);
         $url = Url::findOneByUser($id, $request);
         $url->update($request->all());
-
+        Helpers::rememberForever($url->short_url);
         return redirect(route('user.urls.index'));
     }
 
@@ -114,6 +116,7 @@ class UrlController extends Controller
         $url = Url::findOneByUser($id, $request);
         if ($url !== null) {
             Url::destroy($id);
+            Helpers::clearCacheForKey($url->short_url);
             $request->session()->flash('success', 'You have deleted the url.');
         }
         else {

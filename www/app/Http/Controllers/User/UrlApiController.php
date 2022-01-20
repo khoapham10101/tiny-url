@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Url;
 use App\Http\Resources\UrlsResource;
+use Illuminate\Support\Facades\Cache;
 
 class UrlApiController extends Controller
 {
@@ -40,14 +41,16 @@ class UrlApiController extends Controller
      */
     public function store(Request $request)
     {
+        $short_url = Helpers::generate(Helpers::LENGTH);
         $url = Url::create(
             [
-                'short_url' => Helpers::generate(Helpers::LENGTH),
+                'short_url' => $short_url,
                 'long_url' => $request->long_url,
                 'hits' => 0,
                 'user_id' => $request->user()->id
             ]
         );
+        Helpers::rememberForever($short_url);
         return new UrlsResource($url);
     }
 
@@ -86,6 +89,7 @@ class UrlApiController extends Controller
         $url->update([
            'long_url' => $request->long_url
         ]);
+        Helpers::rememberForever($url->short_url);
         return new UrlsResource($url);
     }
 
@@ -100,6 +104,7 @@ class UrlApiController extends Controller
         $url = Url::findOneByUser($id, $request);
         if ($url !== null) {
             Url::destroy($id);
+            Helpers::clearCacheForKey($url->short_url);
             return response(null, 204);
         }
         return response(null, 404);

@@ -3,12 +3,16 @@
 namespace App\Helper;
 
 use App\Models\Url;
+use Illuminate\Support\Facades\Cache;
+
 /**
  * Auto generate shorten urls.
  */
 class Helpers {
 
     const LENGTH = 7;
+
+    const REDIS_TIME = -1;
 
     /**
      * @param $len
@@ -31,5 +35,20 @@ class Helpers {
     static function validate($string)
     {
         return null !== Url::where('short_url', $string)->first() ? true : false;
+    }
+
+    static function clearCacheForKey($key)
+    {
+        Cache::forget($key);
+    }
+
+    static function rememberForever($short_url, $long_url = '')
+    {
+        Cache::rememberForever($short_url, function() use ($short_url, $long_url) {
+            if ($long_url) {
+                return $long_url;
+            }
+            return Url::findOneByPath($short_url)->long_url;
+        });
     }
 }
