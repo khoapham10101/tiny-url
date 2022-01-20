@@ -1,0 +1,91 @@
+on: [ push, pull_request ]
+
+name: SpiderBox - THE URL SHORTENER
+jobs:
+  coding-standards:
+    name: "Coding Standards"
+    runs-on: "ubuntu-20.04"
+
+    strategy:
+      matrix:
+        php-version:
+          - "7.3"
+          - "7.4"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v2"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          coverage: "none"
+          php-version: "${{ matrix.php-version }}"
+          tools: "cs2pr"
+
+      - name: "Cache dependencies installed with Composer"
+        uses: "actions/cache@v2"
+        with:
+          path: "~/.composer/cache"
+          key: "php-${{ matrix.php-version }}-composer-locked-${{ hashFiles('composer.lock') }}"
+          restore-keys: "php-${{ matrix.php-version }}-composer-locked-"
+
+      - name: "Install dependencies with Composer"
+        run: "composer install"
+
+      - name: "Create report folder for PHPCS"
+        run: "mkdir -p phpcs_report"
+
+      - name: "Run PHP_CodeSniffer"
+        run: "vendor/bin/phpcs app --no-colors --report=checkstyle"
+
+      - name: "Run PHP_CodeSniffer second try"
+        run: "vendor/bin/phpcs -n -v --extensions=php,module,inc,install,test,profile,theme,info,txt,md app --ignore=*.css,*.js,*.scss,*.md --report=full --report-file=phpcs_$(date '+%Y%m%d_%H:%M:%S').txt"
+  static-analysis:
+    name: "Static Analysis with PHPStan"
+    runs-on: "ubuntu-20.04"
+
+    strategy:
+      matrix:
+        php-version:
+          - "7.4"
+
+    steps:
+      - name: "Checkout code"
+        uses: "actions/checkout@v2"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          coverage: "none"
+          php-version: "${{ matrix.php-version }}"
+          tools: "cs2pr"
+
+      - name: "Cache dependencies installed with composer"
+        uses: "actions/cache@v2"
+        with:
+          path: "~/.composer/cache"
+          key: "php-${{ matrix.php-version }}-composer-locked-${{ hashFiles('composer.lock') }}"
+          restore-keys: "php-${{ matrix.php-version }}-composer-locked-"
+
+      - name: "Install dependencies with composer"
+        run: "composer install"
+
+#        - name: "Create phpmd folder"
+#          run: "mkdir -p phpmd-check"
+
+        - name: "Run Phpmd"
+          run: "vendor/bin/phpmd app/ html  cleancode,codesize,controversial,design,naming,unusedcode > test.html"
+
+      - name: "Run phpmetric"
+        run: "vendor/bin/phpmetrics --report-html=phpmetrics_$(date '+%Y%m%d') app/"
+
+      - name: "Run PHP unitTest"
+        run: "vendor/bin/phpunit  tests/"
+
+      - name: "Run a static analysis with phpstan/phpstan"
+        run: "vendor/bin/phpstan analyse --error-format=checkstyle app/"
+        continue-on-error: true
+
+      - name: "Composer validate"
+        run: "composer validate --with-dependencies"

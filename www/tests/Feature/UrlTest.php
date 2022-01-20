@@ -50,7 +50,8 @@ class UrlTest extends TestCase
 
     public function test_validate_an_existing_shorten_url()
     {
-        $this->assertTrue(Helpers::validate('XzdVA8i'));
+        $url = Url::factory()->create();
+        $this->assertTrue(Helpers::validate($url->short_url));
     }
 
     public function test_user_can_use_this_shorten_url()
@@ -83,6 +84,15 @@ class UrlTest extends TestCase
 
         $response = $this->get('/user/urls/102');
         $response->assertStatus(500);
+    }
+
+    public function test_anonymous_users_can_not_delete_their_shorten_url()
+    {
+
+        $url = Url::factory()->create();
+
+        $response = $this->delete('/user/urls/' . $url->id);
+        $response->assertRedirect('/login');
     }
 
     public function test_users_can_delete_their_shorten_url()
