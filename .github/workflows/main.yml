@@ -80,8 +80,8 @@ jobs:
 #        - name: "Create phpmd folder"
 #          run: "mkdir -p phpmd-check"
 
-        - name: "Run Phpmd"
-          run: "vendor/bin/phpmd app/ html  cleancode,codesize,controversial,design,naming,unusedcode > test.html"
+      - name: "Run Phpmd"
+        run: "vendor/bin/phpmd app/ html  cleancode,codesize,controversial,design,naming,unusedcode > test.html"
 
       - name: "Run phpmetric"
         run: "vendor/bin/phpmetrics --report-html=phpmetrics_$(date '+%Y%m%d') app/"
