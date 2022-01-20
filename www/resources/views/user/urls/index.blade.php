@@ -24,7 +24,9 @@
                 <tr>
                     <th scope="row"><a class="link-info" href="{{ route('user.urls.show', $url->id) }}">{{ $url->id }}</a></th>
                     <td>{{ $url->long_url }}</td>
-                    <td>{{ $url->short_url }}</td>
+                    <td>
+                    <a class="" href="{{ url('/') . '/' . $url->short_url }}">{{ $url->short_url }}</a>
+                    </td>
                     <td>{{ $url->hits }}</td>
                     <td>
                         <a class="btn btn-info btn-sm" href="{{ route('user.urls.show', $url->id) }}">View</a>

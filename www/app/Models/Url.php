@@ -45,4 +45,10 @@ class Url extends Model
             ->where('user_id', '=', $request->user()->id)
             ->first();
     }
+
+    public function findOneByPath($path) {
+        return self::select('*')
+            ->where('short_url', '=', $path)
+            ->first();
+    }
 }

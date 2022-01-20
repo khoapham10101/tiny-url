@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\UrlController;
+use App\Http\Controllers\User\RedirectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,5 @@ Route::prefix('admin')->middleware(['auth', 'auth.isAdmin'])->name('admin.')->gr
 Route::prefix('user')->middleware(['auth'])->name('user.')->group(function() {
     Route::resource('/urls', UrlController::class);
 });
+
+Route::get('/{url}', '\App\Http\Controllers\User\RedirectController@index')->name('shorten-url');
