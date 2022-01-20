@@ -19,8 +19,8 @@ class RedirectController extends Controller
     public function index(Request $request)
     {
         $path = $request->path();
-        if(Helpers::LENGTH == strlen($path)) {
-            $url = Cache::rememberForever($path, function() use ($path) {
+        if (Helpers::LENGTH == strlen($path)) {
+            $url = Cache::rememberForever($path, function () use ($path) {
                 return Url::findOneByPath($path)->long_url;
             });
             if ($url) {

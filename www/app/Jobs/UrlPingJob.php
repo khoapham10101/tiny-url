@@ -33,7 +33,7 @@ class UrlPingJob implements ShouldQueue
      */
     public function handle()
     {
-        switch($this->data['function']) {
+        switch ($this->data['function']) {
             case 'updateHit':
                 $this->updateHit($this->data['short_url']);
                 break;

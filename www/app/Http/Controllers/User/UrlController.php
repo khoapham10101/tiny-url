@@ -46,7 +46,7 @@ class UrlController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'long_url' => 'required'
 
         ]);
@@ -96,7 +96,7 @@ class UrlController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'long_url' => 'required',
         ]);
         $url = Url::findOneByUser($id, $request);
@@ -118,8 +118,7 @@ class UrlController extends Controller
             Url::destroy($id);
             Helpers::clearCacheForKey($url->short_url);
             $request->session()->flash('success', 'You have deleted the url.');
-        }
-        else {
+        } else {
             $request->session()->flash('success', 'You do nothing.');
         }
         return redirect(route('user.urls.index'));

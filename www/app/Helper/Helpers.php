@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Cache;
 /**
  * Auto generate shorten urls.
  */
-class Helpers {
+class Helpers
+{
 
     const LENGTH = 7;
 
@@ -18,7 +19,7 @@ class Helpers {
      * @param $len
      * @return false|string
      */
-    static function generate($len)
+    public static function generate($len)
     {
         $str_default = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         $str_result = substr(str_shuffle($str_default), 0, $len);
@@ -32,19 +33,19 @@ class Helpers {
      * @param $string
      * @return mixed
      */
-    static function validate($string)
+    public static function validate($string)
     {
         return null !== Url::where('short_url', $string)->first() ? true : false;
     }
 
-    static function clearCacheForKey($key)
+    public static function clearCacheForKey($key)
     {
         Cache::forget($key);
     }
 
-    static function rememberForever($short_url, $long_url = '')
+    public static function rememberForever($short_url, $long_url = '')
     {
-        Cache::rememberForever($short_url, function() use ($short_url, $long_url) {
+        Cache::rememberForever($short_url, function () use ($short_url, $long_url) {
             if ($long_url) {
                 return $long_url;
             }

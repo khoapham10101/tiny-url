@@ -29,7 +29,6 @@ class UserController extends Controller
             'users' => $users
             ]
         );
-
     }
 
     /**
@@ -39,7 +38,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create',['roles' => Role::all()]);
+        return view('admin.users.create', ['roles' => Role::all()]);
     }
 
     /**

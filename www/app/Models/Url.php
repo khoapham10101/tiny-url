@@ -40,7 +40,8 @@ class Url extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function findOneByUser($id, Request $request) {
+    public function findOneByUser($id, Request $request)
+    {
         $url = self::select('*')
             ->where('id', '=', $id)
             ->where('user_id', '=', $request->user()->id)
@@ -49,7 +50,8 @@ class Url extends Model
         return $url;
     }
 
-    public function findOneByPath($path) {
+    public function findOneByPath($path)
+    {
         $url = self::select('*')
             ->where('short_url', '=', $path)
             ->first();
