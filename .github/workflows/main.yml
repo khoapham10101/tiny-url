@@ -37,7 +37,7 @@ jobs:
 
       - name: "Install dependencies with Composer"
         working-directory: ./www
-        run: "composer install"
+        run: "composer install --no-scripts"
 
       - name: "Create report folder for PHPCS"
         working-directory: ./www
@@ -79,7 +79,7 @@ jobs:
 
       - name: "Install dependencies with composer"
         working-directory: ./www
-        run: "composer install"
+        run: "composer install --no-scripts"
 
       - name: "Run Phpmd"
         working-directory: ./www
@@ -90,13 +90,9 @@ jobs:
         working-directory: ./www
         run: "vendor/bin/phpmetrics --report-html=phpmetrics_$(date '+%Y%m%d') app/"
 
-#      - name: "Generate key"
-#        working-directory: ./www
-#        run: "php artisan key:generate"
-
       - name: "Run PHP unitTest"
-#        working-directory: ./www
-        run: "php artisan test"
+        working-directory: ./www
+        run: "vendor/bin/phpunit tests/"
         continue-on-error: true
 
       - name: "Run a static analysis with phpstan/phpstan"
