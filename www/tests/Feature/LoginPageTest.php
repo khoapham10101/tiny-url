@@ -16,19 +16,13 @@ class LoginPageTest extends TestCase
      */
     public function test_user_can_login_using_login_form()
     {
-        // Check creating a new user
-       $user = User::factory()->create();
-
-        $this->assertNotNull($user);
-        $this->assertIsString($user->email);
-        $this->assertIsString($user->password);
 
        // Check user login
         // Can't work with current user, must fix the email+pass
        $response = $this->post('/login', [
 //           'email' => $user->email,
-           'email' => 'xazijycul@mailinator.com',
-           'password' => 'password'
+           'email' => 'khoa@abc.def',
+           'password' => '12121212'
        ]);
 
        // Is authenticated?

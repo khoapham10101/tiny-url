@@ -30,6 +30,6 @@ class Helpers {
      */
     static function validate($string)
     {
-        return Url::where('short_url', $string)->first();
+        return null !== Url::where('short_url', $string)->first() ? true : false;
     }
 }
