@@ -90,6 +90,10 @@ jobs:
         working-directory: ./www
         run: "vendor/bin/phpmetrics --report-html=phpmetrics_$(date '+%Y%m%d') app/"
 
+      - name: "Generate key"
+        working-directory: ./www
+        run: "php artisan key:generate"
+
       - name: "Run PHP unitTest"
         working-directory: ./www
         run: "php artisan test"
