@@ -27,7 +27,7 @@
                     @if (Route::has('login'))
                         <div>
                             @auth
-                                <a href="{{ url('/') }}">Home</a>
+                                <span class="text-wrap"> Hi {{ Auth::user()->name }}</span>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                                 <form style="display:none" method="POST" action="{{ route('logout') }}" id="logout-form">
                                     @csrf
