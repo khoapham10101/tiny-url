@@ -15,7 +15,7 @@ class UrlTest extends TestCase
      *
      * @return void
      */
-    public function test_anonymous_can_not_access_their_url_list()
+    public function test_anonymous_can_not_access_any_url_list()
     {
         $response = $this->get('/user/urls');
 
@@ -26,10 +26,7 @@ class UrlTest extends TestCase
 
     public function test_users_can_access_their_url_list()
     {
-        $this->post('/login', [
-            'email' => 'khoapham10101@gmail.com',
-            'password' => '12121212'
-        ]);
+        $this->post('/login', $this->dataForNormalUser());
 
         // Is authenticated?
         $this->assertAuthenticated();
@@ -63,10 +60,7 @@ class UrlTest extends TestCase
 
     public function test_users_can_see_their_shorten_detail()
     {
-        $this->post('/login', [
-            'email' => 'khoa@abc.def',
-            'password' => '12121212'
-        ]);
+        $this->post('/login', $this->dataForAdminUser());
 
         // Is authenticated?
         $this->assertAuthenticated();
@@ -75,5 +69,45 @@ class UrlTest extends TestCase
 
         $response->assertSee('Url detail');
         $response->assertStatus(200);
+    }
+
+    public function test_users_can_not_see_another_shorten_detail_else()
+    {
+        $this->post('/login', [
+            'email' => 'khoa@abc.def',
+            'password' => '12121212'
+        ]);
+
+        // Is authenticated?
+        $this->assertAuthenticated();
+
+        $response = $this->get('/user/urls/102');
+        $response->assertStatus(500);
+    }
+
+    public function test_users_can_delete_their_shorten_url()
+    {
+        $this->post('/login',$this->dataForAdminUser());
+
+        $url = Url::factory()->create();
+
+        $response = $this->delete('/user/urls/' . $url->id);
+        $response->assertRedirect('/user/urls');
+    }
+
+    private function dataForAdminUser()
+    {
+        return [
+            'email' => 'khoa@abc.def',
+            'password' => '12121212'
+        ];
+    }
+
+    private function dataForNormalUser()
+    {
+        return [
+            'email' => 'khoapham10101@gmail.com',
+            'password' => '12121212'
+        ];
     }
 }
