@@ -17,9 +17,12 @@ class UrlApiController extends Controller
     public function index()
     {
 //        return Url::paginate(10);
-        return response()->json([
-            'data' => Url::paginate(5)
-        ]);
+//        return response()->json([
+//            'data' => Url::paginate(5)
+//        ]);
+        return UrlsResource::collection(
+            Url::all()
+        );
     }
 
     /**
@@ -40,7 +43,15 @@ class UrlApiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $url = Url::create(
+            [
+                'short_url' => 'XzdVA88',
+                'long_url' => $request->long_url,
+                'hits' => 0,
+                'user_id' => $request->user()->id
+            ]
+        );
+        return new UrlsResource($url);
     }
 
     /**
