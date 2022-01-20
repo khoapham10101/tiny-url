@@ -101,7 +101,7 @@ class UrlController extends Controller
         ]);
         $url = Url::findOneByUser($id, $request);
         $url->update($request->all());
-        Helpers::rememberForever($url->short_url);
+        Helpers::clearCacheForKey($url->short_url);
         return redirect(route('user.urls.index'));
     }
 

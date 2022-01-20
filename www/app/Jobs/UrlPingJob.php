@@ -43,6 +43,12 @@ class UrlPingJob implements ShouldQueue
         }
     }
 
+    /**
+     * Anytime users hit their links, hits will be increased.
+     *
+     * @param $short_url
+     * @return void
+     */
     private function updateHit($short_url)
     {
         $url = Url::findOneByPath($short_url);

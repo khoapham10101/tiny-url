@@ -89,7 +89,7 @@ class UrlApiController extends Controller
         $url->update([
            'long_url' => $request->long_url
         ]);
-        Helpers::rememberForever($url->short_url);
+        Helpers::clearCacheForKey($url->short_url);
         return new UrlsResource($url);
     }
 

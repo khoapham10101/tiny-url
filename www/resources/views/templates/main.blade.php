@@ -60,11 +60,9 @@
 {{--                                    <a class="nav-link" href="{{ route('user.urls.all') }}">All Urls</a>--}}
                                 </li>
                             @endcan
-                            @can('is-user')
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('user.urls.index') }}">My Urls</a>
-                                </li>
-                            @endcan
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.urls.index') }}">My Urls</a>
+                            </li>
                         @endif
                     </ul>
                 </div>
