@@ -25,7 +25,7 @@ class RedirectController extends Controller
             if ($url) {
                 return redirect($url, 301);
             }
-            return response(null, 404);
         }
+        return response(null, 404);
     }
 }
