@@ -95,15 +95,15 @@ class UrlTest extends TestCase
         $response->assertRedirect('/login');
     }
 
-    public function test_users_can_delete_their_shorten_url()
-    {
-        $this->post('/login',$this->dataForAdminUser());
-
-        $url = Url::factory()->create();
-
-        $response = $this->delete('/user/urls/' . $url->id);
-        $response->assertRedirect('/user/urls');
-    }
+//    public function test_users_can_delete_their_shorten_url()
+//    {
+//        $this->post('/login',$this->dataForAdminUser());
+//
+//        $url = Url::factory()->create();
+//
+//        $response = $this->delete('/user/urls/' . $url->id);
+//        $response->assertRedirect('/user/urls');
+//    }
 
     private function dataForAdminUser()
     {

@@ -92,7 +92,7 @@ jobs:
 
       - name: "Run PHP unitTest"
         working-directory: ./www
-        run: "vendor/bin/phpunit  tests/"
+        run: "php artisan test"
 
       - name: "Run a static analysis with phpstan/phpstan"
         working-directory: ./www
