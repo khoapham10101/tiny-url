@@ -37,15 +37,19 @@ jobs:
           restore-keys: "php-${{ matrix.php-version }}-composer-locked-"
 
       - name: "Install dependencies with Composer"
-        run: "cd www && composer install"
+        working-directory: ./www
+        run: "composer install"
 
       - name: "Create report folder for PHPCS"
+        working-directory: ./www
         run: "mkdir -p phpcs_report"
 
       - name: "Run PHP_CodeSniffer"
+        working-directory: ./www
         run: "vendor/bin/phpcs app --no-colors --report=checkstyle"
 
       - name: "Run PHP_CodeSniffer second try"
+        working-directory: ./www
         run: "vendor/bin/phpcs -n -v --extensions=php,module,inc,install,test,profile,theme,info,txt,md app --ignore=*.css,*.js,*.scss,*.md --report=full --report-file=phpcs_$(date '+%Y%m%d_%H:%M:%S').txt"
   static-analysis:
     name: "Static Analysis with PHPStan"
@@ -75,23 +79,29 @@ jobs:
           restore-keys: "php-${{ matrix.php-version }}-composer-locked-"
 
       - name: "Install dependencies with composer"
+        working-directory: ./www
         run: "composer install"
 
 #        - name: "Create phpmd folder"
 #          run: "mkdir -p phpmd-check"
 
       - name: "Run Phpmd"
+        working-directory: ./www
         run: "vendor/bin/phpmd app/ html  cleancode,codesize,controversial,design,naming,unusedcode > test.html"
 
       - name: "Run phpmetric"
+        working-directory: ./www
         run: "vendor/bin/phpmetrics --report-html=phpmetrics_$(date '+%Y%m%d') app/"
 
       - name: "Run PHP unitTest"
+        working-directory: ./www
         run: "vendor/bin/phpunit  tests/"
 
       - name: "Run a static analysis with phpstan/phpstan"
+        working-directory: ./www
         run: "vendor/bin/phpstan analyse --error-format=checkstyle app/"
         continue-on-error: true
 
       - name: "Composer validate"
+        working-directory: ./www
         run: "composer validate --with-dependencies"
