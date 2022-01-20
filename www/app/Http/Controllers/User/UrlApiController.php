@@ -15,14 +15,10 @@ class UrlApiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-//        return Url::paginate(10);
-//        return response()->json([
-//            'data' => Url::paginate(5)
-//        ]);
         return UrlsResource::collection(
-            Url::all()
+            Url::where('user_id', $request->user()->id)->paginate(10)
         );
     }
 
@@ -61,9 +57,9 @@ class UrlApiController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        return new UrlsResource(Url::find($id));
+        return new UrlsResource(Url::findOneByUser($id, $request));
     }
 
     /**
@@ -86,7 +82,7 @@ class UrlApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $url = Url::find($id);
+        $url = Url::findOneByUser($id, $request);
         $url->update([
            'long_url' => $request->long_url
         ]);
@@ -99,9 +95,13 @@ class UrlApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        Url::destroy($id);
-        return response(null, 204);
+        $url = Url::findOneByUser($id, $request);
+        if ($url !== null) {
+            Url::destroy($id);
+            return response(null, 204);
+        }
+        return response(null, 404);
     }
 }

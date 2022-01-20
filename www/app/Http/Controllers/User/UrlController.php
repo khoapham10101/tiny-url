@@ -17,7 +17,6 @@ class UrlController extends Controller
     public function index(Request $request)
     {
         $user_id = $request->user()->id;
-//        $user_id = 32110;
         $urls = Url::sortable()->where('user_id', $user_id)->paginate(10);
 
         return view('user.urls.index')->with(
@@ -27,21 +26,6 @@ class UrlController extends Controller
         );
     }
 
-//    /**
-//     * Display a listing of all the resource.
-//     *
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function all(Request $request)
-//    {
-//        $urls = Url::paginate(10);
-//
-//        return view('user.urls.index')->with(
-//            [
-//                'urls' => $urls
-//            ]
-//        );
-//    }
 
     /**
      * Show the form for creating a new resource.
@@ -85,7 +69,7 @@ class UrlController extends Controller
      */
     public function show($id, Request $request)
     {
-        $url = Url::find($id);
+        $url = Url::findOneByUser($id, $request);
         return view('user.urls.show', ['url' => $url]);
     }
 
@@ -95,9 +79,9 @@ class UrlController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        $url = Url::find($id);
+        $url = Url::findOneByUser($id, $request);
         return view('user.urls.update', ['url' => $url]);
     }
 
@@ -113,7 +97,7 @@ class UrlController extends Controller
         $this->validate($request,[
             'long_url' => 'required',
         ]);
-        $url = Url::findOrFail($id);
+        $url = Url::findOneByUser($id, $request);
         $url->update($request->all());
 
         return redirect(route('user.urls.index'));
@@ -127,8 +111,14 @@ class UrlController extends Controller
      */
     public function destroy($id, Request $request)
     {
-        Url::destroy($id);
-        $request->session()->flash('success', 'You have deleted the url.');
+        $url = Url::findOneByUser($id, $request);
+        if ($url !== null) {
+            Url::destroy($id);
+            $request->session()->flash('success', 'You have deleted the url.');
+        }
+        else {
+            $request->session()->flash('success', 'You do nothing.');
+        }
         return redirect(route('user.urls.index'));
     }
 }
