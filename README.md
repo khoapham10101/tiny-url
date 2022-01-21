@@ -11,7 +11,7 @@
 ## Installation
 
 1. mkdir tinyurl && git clone git@github.com:drupalex10/test1.git tinyurl
-2. cd tinyurl
+2. cd tinyurl && cp www/.env www/.env.local
 3. docker-compose up --build -d --force-recreate (**for the first time**)
 4. docker-compose up -d (**for the remaining time**)
 5. docker-compose exec www bash
