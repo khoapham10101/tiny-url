@@ -1,0 +1,220 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TinyUrl",
+		"_postman_id": "4bc5aee0-6fd4-7106-4f12-be9e1c82b7ba",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Current user information",
+			"request": {
+				"url": "http://tinyurl.local:8168/api/v1/user",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiNjU2OTFmY2ZhMDQ3NjBjNWJiYTcxZDUxZWM4MGQ2OTZkMWRhZjY1Yzk3NDdjNTY0YTJkYTg2MTIxMWJlMjg5NjJhMWYwZmJhYjY4YTI0ZTAiLCJpYXQiOjE2NDI2MTIyNTUuMzAwMDksIm5iZiI6MTY0MjYxMjI1NS4zMDAwOTUsImV4cCI6MTY3NDE0ODI1NS4yNjM0NzgsInN1YiI6IjMyMTEwIiwic2NvcGVzIjpbXX0.xYhk3OuvvJXNyovZ_5KDu7qBadeZLVcPRIn35FMZolQTZ235btZ8cLvaMd2qhT8-haaJ8tOYqWwlb9gi3ncR7cHS0EvU0Zqvni43aQKRqpIU_oN8Qo8o6r2x4Ge236j9DhD35-C3mMlLmD0tgz6Ke4o_gabbX9XgL6st_s272967qybgwS-eU7OmYQyVENYMx3Pbg0Gm4amxP_ujGlyXD_zw_cX52yvGG3Ym6Eqv6DYEknAtfH14903uxn_iLrrDGuTtGl3UmtSBretp-5Nk1ktoD84BBI74QFQWSuwcM0f7-EDALdCpK9xlrGPx24bLOTpFWjFFgR0JWy30Cqke2iioNdMO8J0XRWshnsflGFBUF8XgzsxAUhzyU4_79eIQhUkzmeSMo2OoA6dtCGK5ghrWwqwS2IhRh_8zQrhKyNT6pIox2xddtBgGX6dAIAxke0WVFHlJMEp8VRvK-NvXyGZALldrMtDcsk2f9LOeIPynPdrVsQzCeU0F3UnavXvFYuwf8HTxFnQYN7bbQOOqEUSeWOTpzae4tcWkhyCwIRA0uPfwpLE-vNqMCcnecypGiWwk6wQpM4Hsd2BFJ06EEqcLgQbvmfmvF1iqYjOyL_TkGHBWI2zJINdUbDYaUqFmMTwavRQTdGZvLgq0kxbjbaolmnEcIPpzNXMGk3GTcn8",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Urls",
+			"request": {
+				"url": "http://localhost:8168/api/v1/urls",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiNjU2OTFmY2ZhMDQ3NjBjNWJiYTcxZDUxZWM4MGQ2OTZkMWRhZjY1Yzk3NDdjNTY0YTJkYTg2MTIxMWJlMjg5NjJhMWYwZmJhYjY4YTI0ZTAiLCJpYXQiOjE2NDI2MTIyNTUuMzAwMDksIm5iZiI6MTY0MjYxMjI1NS4zMDAwOTUsImV4cCI6MTY3NDE0ODI1NS4yNjM0NzgsInN1YiI6IjMyMTEwIiwic2NvcGVzIjpbXX0.xYhk3OuvvJXNyovZ_5KDu7qBadeZLVcPRIn35FMZolQTZ235btZ8cLvaMd2qhT8-haaJ8tOYqWwlb9gi3ncR7cHS0EvU0Zqvni43aQKRqpIU_oN8Qo8o6r2x4Ge236j9DhD35-C3mMlLmD0tgz6Ke4o_gabbX9XgL6st_s272967qybgwS-eU7OmYQyVENYMx3Pbg0Gm4amxP_ujGlyXD_zw_cX52yvGG3Ym6Eqv6DYEknAtfH14903uxn_iLrrDGuTtGl3UmtSBretp-5Nk1ktoD84BBI74QFQWSuwcM0f7-EDALdCpK9xlrGPx24bLOTpFWjFFgR0JWy30Cqke2iioNdMO8J0XRWshnsflGFBUF8XgzsxAUhzyU4_79eIQhUkzmeSMo2OoA6dtCGK5ghrWwqwS2IhRh_8zQrhKyNT6pIox2xddtBgGX6dAIAxke0WVFHlJMEp8VRvK-NvXyGZALldrMtDcsk2f9LOeIPynPdrVsQzCeU0F3UnavXvFYuwf8HTxFnQYN7bbQOOqEUSeWOTpzae4tcWkhyCwIRA0uPfwpLE-vNqMCcnecypGiWwk6wQpM4Hsd2BFJ06EEqcLgQbvmfmvF1iqYjOyL_TkGHBWI2zJINdUbDYaUqFmMTwavRQTdGZvLgq0kxbjbaolmnEcIPpzNXMGk3GTcn8",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Add a new Url",
+			"request": {
+				"url": "http://localhost:8168/api/v1/urls",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiNjU2OTFmY2ZhMDQ3NjBjNWJiYTcxZDUxZWM4MGQ2OTZkMWRhZjY1Yzk3NDdjNTY0YTJkYTg2MTIxMWJlMjg5NjJhMWYwZmJhYjY4YTI0ZTAiLCJpYXQiOjE2NDI2MTIyNTUuMzAwMDksIm5iZiI6MTY0MjYxMjI1NS4zMDAwOTUsImV4cCI6MTY3NDE0ODI1NS4yNjM0NzgsInN1YiI6IjMyMTEwIiwic2NvcGVzIjpbXX0.xYhk3OuvvJXNyovZ_5KDu7qBadeZLVcPRIn35FMZolQTZ235btZ8cLvaMd2qhT8-haaJ8tOYqWwlb9gi3ncR7cHS0EvU0Zqvni43aQKRqpIU_oN8Qo8o6r2x4Ge236j9DhD35-C3mMlLmD0tgz6Ke4o_gabbX9XgL6st_s272967qybgwS-eU7OmYQyVENYMx3Pbg0Gm4amxP_ujGlyXD_zw_cX52yvGG3Ym6Eqv6DYEknAtfH14903uxn_iLrrDGuTtGl3UmtSBretp-5Nk1ktoD84BBI74QFQWSuwcM0f7-EDALdCpK9xlrGPx24bLOTpFWjFFgR0JWy30Cqke2iioNdMO8J0XRWshnsflGFBUF8XgzsxAUhzyU4_79eIQhUkzmeSMo2OoA6dtCGK5ghrWwqwS2IhRh_8zQrhKyNT6pIox2xddtBgGX6dAIAxke0WVFHlJMEp8VRvK-NvXyGZALldrMtDcsk2f9LOeIPynPdrVsQzCeU0F3UnavXvFYuwf8HTxFnQYN7bbQOOqEUSeWOTpzae4tcWkhyCwIRA0uPfwpLE-vNqMCcnecypGiWwk6wQpM4Hsd2BFJ06EEqcLgQbvmfmvF1iqYjOyL_TkGHBWI2zJINdUbDYaUqFmMTwavRQTdGZvLgq0kxbjbaolmnEcIPpzNXMGk3GTcn8",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "long_url",
+							"value": "https://abcdef1.com",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update an Url",
+			"request": {
+				"url": "http://localhost:8168/api/v1/urls/177",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiNjU2OTFmY2ZhMDQ3NjBjNWJiYTcxZDUxZWM4MGQ2OTZkMWRhZjY1Yzk3NDdjNTY0YTJkYTg2MTIxMWJlMjg5NjJhMWYwZmJhYjY4YTI0ZTAiLCJpYXQiOjE2NDI2MTIyNTUuMzAwMDksIm5iZiI6MTY0MjYxMjI1NS4zMDAwOTUsImV4cCI6MTY3NDE0ODI1NS4yNjM0NzgsInN1YiI6IjMyMTEwIiwic2NvcGVzIjpbXX0.xYhk3OuvvJXNyovZ_5KDu7qBadeZLVcPRIn35FMZolQTZ235btZ8cLvaMd2qhT8-haaJ8tOYqWwlb9gi3ncR7cHS0EvU0Zqvni43aQKRqpIU_oN8Qo8o6r2x4Ge236j9DhD35-C3mMlLmD0tgz6Ke4o_gabbX9XgL6st_s272967qybgwS-eU7OmYQyVENYMx3Pbg0Gm4amxP_ujGlyXD_zw_cX52yvGG3Ym6Eqv6DYEknAtfH14903uxn_iLrrDGuTtGl3UmtSBretp-5Nk1ktoD84BBI74QFQWSuwcM0f7-EDALdCpK9xlrGPx24bLOTpFWjFFgR0JWy30Cqke2iioNdMO8J0XRWshnsflGFBUF8XgzsxAUhzyU4_79eIQhUkzmeSMo2OoA6dtCGK5ghrWwqwS2IhRh_8zQrhKyNT6pIox2xddtBgGX6dAIAxke0WVFHlJMEp8VRvK-NvXyGZALldrMtDcsk2f9LOeIPynPdrVsQzCeU0F3UnavXvFYuwf8HTxFnQYN7bbQOOqEUSeWOTpzae4tcWkhyCwIRA0uPfwpLE-vNqMCcnecypGiWwk6wQpM4Hsd2BFJ06EEqcLgQbvmfmvF1iqYjOyL_TkGHBWI2zJINdUbDYaUqFmMTwavRQTdGZvLgq0kxbjbaolmnEcIPpzNXMGk3GTcn8",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"long_url\": \"http://xyz.xyz111\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an Url",
+			"request": {
+				"url": "http://localhost:8168/api/v1/urls/101",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiNjU2OTFmY2ZhMDQ3NjBjNWJiYTcxZDUxZWM4MGQ2OTZkMWRhZjY1Yzk3NDdjNTY0YTJkYTg2MTIxMWJlMjg5NjJhMWYwZmJhYjY4YTI0ZTAiLCJpYXQiOjE2NDI2MTIyNTUuMzAwMDksIm5iZiI6MTY0MjYxMjI1NS4zMDAwOTUsImV4cCI6MTY3NDE0ODI1NS4yNjM0NzgsInN1YiI6IjMyMTEwIiwic2NvcGVzIjpbXX0.xYhk3OuvvJXNyovZ_5KDu7qBadeZLVcPRIn35FMZolQTZ235btZ8cLvaMd2qhT8-haaJ8tOYqWwlb9gi3ncR7cHS0EvU0Zqvni43aQKRqpIU_oN8Qo8o6r2x4Ge236j9DhD35-C3mMlLmD0tgz6Ke4o_gabbX9XgL6st_s272967qybgwS-eU7OmYQyVENYMx3Pbg0Gm4amxP_ujGlyXD_zw_cX52yvGG3Ym6Eqv6DYEknAtfH14903uxn_iLrrDGuTtGl3UmtSBretp-5Nk1ktoD84BBI74QFQWSuwcM0f7-EDALdCpK9xlrGPx24bLOTpFWjFFgR0JWy30Cqke2iioNdMO8J0XRWshnsflGFBUF8XgzsxAUhzyU4_79eIQhUkzmeSMo2OoA6dtCGK5ghrWwqwS2IhRh_8zQrhKyNT6pIox2xddtBgGX6dAIAxke0WVFHlJMEp8VRvK-NvXyGZALldrMtDcsk2f9LOeIPynPdrVsQzCeU0F3UnavXvFYuwf8HTxFnQYN7bbQOOqEUSeWOTpzae4tcWkhyCwIRA0uPfwpLE-vNqMCcnecypGiWwk6wQpM4Hsd2BFJ06EEqcLgQbvmfmvF1iqYjOyL_TkGHBWI2zJINdUbDYaUqFmMTwavRQTdGZvLgq0kxbjbaolmnEcIPpzNXMGk3GTcn8",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Url detail",
+			"request": {
+				"url": "http://localhost:8168/api/v1/urls/102",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiNjU2OTFmY2ZhMDQ3NjBjNWJiYTcxZDUxZWM4MGQ2OTZkMWRhZjY1Yzk3NDdjNTY0YTJkYTg2MTIxMWJlMjg5NjJhMWYwZmJhYjY4YTI0ZTAiLCJpYXQiOjE2NDI2MTIyNTUuMzAwMDksIm5iZiI6MTY0MjYxMjI1NS4zMDAwOTUsImV4cCI6MTY3NDE0ODI1NS4yNjM0NzgsInN1YiI6IjMyMTEwIiwic2NvcGVzIjpbXX0.xYhk3OuvvJXNyovZ_5KDu7qBadeZLVcPRIn35FMZolQTZ235btZ8cLvaMd2qhT8-haaJ8tOYqWwlb9gi3ncR7cHS0EvU0Zqvni43aQKRqpIU_oN8Qo8o6r2x4Ge236j9DhD35-C3mMlLmD0tgz6Ke4o_gabbX9XgL6st_s272967qybgwS-eU7OmYQyVENYMx3Pbg0Gm4amxP_ujGlyXD_zw_cX52yvGG3Ym6Eqv6DYEknAtfH14903uxn_iLrrDGuTtGl3UmtSBretp-5Nk1ktoD84BBI74QFQWSuwcM0f7-EDALdCpK9xlrGPx24bLOTpFWjFFgR0JWy30Cqke2iioNdMO8J0XRWshnsflGFBUF8XgzsxAUhzyU4_79eIQhUkzmeSMo2OoA6dtCGK5ghrWwqwS2IhRh_8zQrhKyNT6pIox2xddtBgGX6dAIAxke0WVFHlJMEp8VRvK-NvXyGZALldrMtDcsk2f9LOeIPynPdrVsQzCeU0F3UnavXvFYuwf8HTxFnQYN7bbQOOqEUSeWOTpzae4tcWkhyCwIRA0uPfwpLE-vNqMCcnecypGiWwk6wQpM4Hsd2BFJ06EEqcLgQbvmfmvF1iqYjOyL_TkGHBWI2zJINdUbDYaUqFmMTwavRQTdGZvLgq0kxbjbaolmnEcIPpzNXMGk3GTcn8",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Generate new token",
+			"request": {
+				"url": "http://localhost:8168/oauth/token",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "2",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "BjmLcJRew8Wpd9sA53FUJfI3GBiOqBv5FQffa3sO",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "khoapham10101@gmail.com",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12121212",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
