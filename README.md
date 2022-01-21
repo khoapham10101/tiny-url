@@ -10,8 +10,8 @@
 
 ## Installation
 
-1. git clone git@github.com:spiderbox/rails-assessment.git
-2. cd rails-assessment
+1. mkdir tinyurl && git clone git@github.com:drupalex10/test1.git tinyurl
+2. cd tinyurl
 3. docker-compose up --build -d --force-recreate (**for the first time**)
 4. docker-compose up -d (**for the remaining time**)
 5. docker-compose exec www bash
