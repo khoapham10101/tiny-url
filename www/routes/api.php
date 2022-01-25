@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Url;
 use App\Http\Controllers\User\UrlApiController;
+use App\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,5 @@ Route::middleware('auth:api')->prefix('v1')->group(function() {
     });
     Route::apiResource('/urls', UrlApiController::class);
 });
+
+Route::post('login', [UserController::class, 'login']);
