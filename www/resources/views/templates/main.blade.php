@@ -27,7 +27,8 @@
                     @if (Route::has('login'))
                         <div>
                             @auth
-                                <span class="text-wrap"> Hi {{ Auth::user()->name }}</span>
+{{--                                <span class="text-wrap"> Hi {{ Auth::user()->name }}</span>--}}
+                                <span class="text-wrap"> {{ __('home.hi', ['name' => Auth::user()->name]) }}</span>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                                 <form style="display:none" method="POST" action="{{ route('logout') }}" id="logout-form">
                                     @csrf
@@ -39,6 +40,7 @@
                                     <a href="{{ route('register') }}">Register</a>
                                 @endif
                             @endauth
+                            @include('templates.language_switcher')
                         </div>
                     @endif
                 </div>

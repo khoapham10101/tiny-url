@@ -38,6 +38,7 @@ class UserController extends Controller
 //        $u = $request->getUser();
 //        dd($u);
         PodcastProcessed::dispatch($this->users);
+//        echo asset('storage/file.txt');
 //        $collection = collect([
 //            ['account_id' => 'account-x10', 'product' => 'Chair'],
 //            ['account_id' => 'account-x10', 'product' => 'Bookcase'],
@@ -105,7 +106,8 @@ class UserController extends Controller
     {
         $user = $this->users->create($request->except(['_token', 'roles']));
         $user->roles()->sync($request->roles);
-        $request->session()->flash('success', 'You have created new user.');
+//        $request->session()->flash('success', 'You have created new user.');
+        $request->session()->flash('success', __('user.user_created'));
         return redirect(route('admin.users.index'));
     }
 
