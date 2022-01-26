@@ -5,23 +5,22 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Contracts\Mail\Mailer;
-
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Redis\Factory;
+
 class FirstMail extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public $details;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Factory $redis)
+    public function __construct($details)
     {
-
-        $this->redis = $redis;
+        $this->details = $details;
     }
 
     /**
@@ -31,8 +30,7 @@ class FirstMail extends Mailable
      */
     public function build()
     {
-        $this->redis->connection();
-//        $this->redis->
-        return $this->view('view.name');
+        return $this->subject('Mail from localhost 123')
+            ->view('emails.myTestMail');
     }
 }

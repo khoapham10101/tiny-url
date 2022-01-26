@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Events\PodcastProcessed;
 use App\Http\Controllers\Controller;
+use App\Mail\FirstMail;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-
+use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
     /**
@@ -37,7 +38,7 @@ class UserController extends Controller
     {
 //        $u = $request->getUser();
 //        dd($u);
-        PodcastProcessed::dispatch($this->users);
+//        PodcastProcessed::dispatch($this->users);
 //        echo asset('storage/file.txt');
 //        $collection = collect([
 //            ['account_id' => 'account-x10', 'product' => 'Chair'],
@@ -78,6 +79,20 @@ class UserController extends Controller
 //            return User::skip($currentPage * $items)->paginate($items);
 //        });
 //        $users = User::paginate(10);
+
+
+        Mail::to('ka@aa.com')->send(new FirstMail([
+            'title' => 'title 1',
+            'description' => 'description 1',
+        ]));
+
+//        if (Mail::failures()) {
+//                return response()->Fail('Sorry! Please try again latter');
+//        }else{
+//            return response()->success('Great! Successfully send in your mail');
+//        }
+
+
         $users = $this->users->paginate(10);
         return view('admin.users.index')->with(
             [

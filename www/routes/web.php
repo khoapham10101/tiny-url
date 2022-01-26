@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\User\UrlController;
 use App\Http\Controllers\User\RedirectController;
+use App\Mail\FirstMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,7 @@ Route::prefix('user')->middleware(['auth'])->name('user.')->group(function() {
 
 Route::get('/{url}', '\App\Http\Controllers\User\RedirectController@index')->name('shorten-url');
 
-Route::get('language/{locale}', function ($locale) {
+Route::get('/language/{locale}', function ($locale) {
     app()->setLocale($locale);
     session()->put('locale', $locale);
     return redirect()->back();
