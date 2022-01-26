@@ -14,6 +14,7 @@
         "laravel/passport": "^10.3",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "monolog/monolog": "^2.3",
         "paragonie/random_compat": "^9.99",
         "predis/predis": "^1.1",
         "vladimir-yuldashev/laravel-queue-rabbitmq": "^11.3"
@@ -21,6 +22,7 @@
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "jason-guru/laravel-make-repository": "^0.0.3",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",

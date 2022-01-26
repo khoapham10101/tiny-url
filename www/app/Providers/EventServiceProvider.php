@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\PodcastProcessed;
 use App\Jobs\UrlPingJob;
+use App\Listeners\SendPodcastNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -32,5 +34,15 @@ class EventServiceProvider extends ServiceProvider
             UrlPingJob::class.'@handle',
             fn($job)=>$job->handle()
         );
+        Event::listen(
+            PodcastProcessed::class,
+            [SendPodcastNotification::class, 'handle']
+        );
+
+//        Event::listen(queueable(function (PodcastProcessed $event) {
+//            //
+//        }));
+        Event::listen(function (PodcastProcessed $event) {
+        });
     }
 }

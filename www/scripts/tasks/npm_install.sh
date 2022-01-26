@@ -6,4 +6,9 @@
 echo -e "${LIGHT_GREEN}Generate assets(html/css/js).${NC}"
 
 npm install
-npm run dev
+
+if [ "${APP_ENV}" = "dev" ]; then
+    npm run dev
+else
+    npm run prod
+fi
