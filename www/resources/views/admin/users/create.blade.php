@@ -3,7 +3,7 @@
     <h1>Create a new User</h1>
 
     <div class="card">
-        <form method="POST" action="{{ route('admin.users.store') }}">
+        <form method="POST" action="{{ route('admin.users.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -32,7 +32,10 @@
                 </span>
                 @enderror
             </div>
-
+            <div class="mb-3">
+                <label for="avatar" class="form-label">Avatar:</label>
+                <input type="file" name="avatar" class="form-control" id="avatar">
+            </div>
             <div class="mb-3">
                 @foreach($roles as $role)
                     <div class="form-check">

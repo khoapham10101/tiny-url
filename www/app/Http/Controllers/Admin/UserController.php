@@ -81,10 +81,10 @@ class UserController extends Controller
 //        $users = User::paginate(10);
 
 
-        Mail::to('ka@aa.com')->send(new FirstMail([
-            'title' => 'title 1',
-            'description' => 'description 1',
-        ]));
+//        Mail::to('ka@aa.com')->send(new FirstMail([
+//            'title' => 'title 2',
+//            'description' => 'description 1',
+//        ]));
 
 //        if (Mail::failures()) {
 //                return response()->Fail('Sorry! Please try again latter');
@@ -121,6 +121,9 @@ class UserController extends Controller
     {
         $user = $this->users->create($request->except(['_token', 'roles']));
         $user->roles()->sync($request->roles);
+        if($request->hasFile('avatar') && $request->file('avatar')->isValid()){
+            $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
+        }
 //        $request->session()->flash('success', 'You have created new user.');
         $request->session()->flash('success', __('user.user_created'));
         return redirect(route('admin.users.index'));

@@ -10,6 +10,7 @@
                 <th scope="col">#Id</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
+                <th scope="col">Avatar</th>
                 <th scope="col">Actions</th>
             </tr>
             </thead>
@@ -19,6 +20,7 @@
                     <th scope="row">{{ $user->id }}</th>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
+                    <td><img src="{{$user->getFirstMediaUrl('avatar', 'thumb')}}" width="120px" /></td>
                     <td>
                         <button class="btn btn-danger btn-sm" href="{{ route('admin.users.destroy', $user->id) }}"
                             onclick="event.preventDefault(); document.getElementById('delete-user-form-{{ $user->id }}').submit();"
