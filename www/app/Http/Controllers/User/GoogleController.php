@@ -51,6 +51,9 @@ class GoogleController extends Controller
                     'google_id'=> $user->id,
                     'password' => encrypt('123456dummy')
                 ]);
+                if ($user->avatar) {
+                    $newUser->addMediaFromUrl($user->avatar)->toMediaCollection('avatar');
+                }
 
                 Auth::login($newUser);
 
