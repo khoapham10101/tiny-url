@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Contracts\Auth\CanResetPassword;
 
 class User extends Authenticatable implements HasMedia
 {
@@ -24,6 +25,7 @@ class User extends Authenticatable implements HasMedia
         'name',
         'email',
         'password',
+        'google_id'
     ];
 
     /**
@@ -34,6 +36,17 @@ class User extends Authenticatable implements HasMedia
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_recovery_codes',
+        'two_factor_secret',
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'profile_photo_url',
     ];
 
     /**

@@ -17,6 +17,8 @@ use Illuminate\Support\Str;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Crypt;
+
 class UserController extends Controller
 {
     /**
@@ -37,6 +39,11 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+//        $encry = Crypt::encryptString('4pRJgEhGwvLyT08esGfHzt345a6VaOuV57ZHjgFr');
+//        dd($encry);
+//        $decrypted = Crypt::decryptString('eyJpdiI6IlRSNmNEK2h1VURYc3o3dGVrQzdOeVE9PSIsInZhbHVlIjoiSFVzR2VESU9BR29lbFZKL3FwTnhJNGFQNGxkdEJobms4L2VjYTZteE1UZ2MrbjBkbGJ5VDBmU0lPcFQ1UGM0QWt5Ykl4Y3hUbk5vdWNGLzlLcXdIY1k5aVdTSlhqQTVBL091dm15bUpyY1RYck83VzFPNlNOM281Sm5EOVZyYmMiLCJtYWMiOiIyNTJhNDM3MmUwNTU3MWZhZWUxNjI3ZGZiMjI3ZDYyZWU2ZDhhNDRiYzQ2ODdiMjE0ZmM3OGY5YjhlZWU3Zjg3IiwidGFnIjoiIn0');
+//        $decrypted = Crypt::decryptString('eyJpdiI6ImRMY1JqcmNodmJ3WVMwa3FjUU4zaEE9PSIsInZhbHVlIjoiNjhLNkkyN3JLbjE1OXNXTnd6Z0lqNHNCalU2dG1qRVU0YnFmTEk2T2l2UEVsTGRLVnBnQVZtYVhaUXVUV3FQYVZXZDU1ZFZQTEI5WjJ3emhSMlBxU3dZZHpWc0FrQ2tBb0dMUk96alhFSmQ1NG9wU0VWRVdrTW9IUUgyb2NqeksiLCJtYWMiOiIwY2NkOTZiMDZhMTgyZGY2Mjc3MjViOWRjNzJmZGQ5ZGQ1OGRlNjljYmRjMWM5NTY2NWZiZDVkODQzZTA3ZjVjIiwidGFnIjoiIn0');
+//        dd($decrypted);
 //        $request->user()
 //        dd($request->user());
 //        $executed = RateLimiter::attempt(

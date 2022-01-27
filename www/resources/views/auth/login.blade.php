@@ -24,7 +24,11 @@
             </span>
             @enderror
         </div>
-
+        <div class="mb-3">
+            <a href="{{ route('google-login') }}">
+                <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
+            </a>
+        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 @endsection
