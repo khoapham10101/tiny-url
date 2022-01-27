@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
@@ -36,6 +37,19 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+//        $request->user()
+//        dd($request->user());
+        $executed = RateLimiter::attempt(
+            'send-message:' . $request->user()->id,
+            $perMinute = 2,
+            function() {
+//                dd('go here');
+            }
+        );
+
+        if (! $executed) {
+            return 'Too many messages sent!';
+        }
 //        $u = $request->getUser();
 //        dd($u);
 //        PodcastProcessed::dispatch($this->users);
