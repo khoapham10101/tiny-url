@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class FirstCommand extends Command
 {
@@ -11,7 +13,7 @@ class FirstCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'first:test';
 
     /**
      * The console command description.
@@ -37,6 +39,13 @@ class FirstCommand extends Command
      */
     public function handle()
     {
+//        return 0;
+//         create a log channel
+        $log = new Logger('name');
+        $log->pushHandler(new StreamHandler('logs/test.log', Logger::WARNING));
+
+        // add records to the log
+        $log->warning('run command "first:test"');
         return 0;
     }
 }

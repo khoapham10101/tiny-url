@@ -39,17 +39,17 @@ class UserController extends Controller
     {
 //        $request->user()
 //        dd($request->user());
-        $executed = RateLimiter::attempt(
-            'send-message:' . $request->user()->id,
-            $perMinute = 2,
-            function() {
-//                dd('go here');
-            }
-        );
-
-        if (! $executed) {
-            return 'Too many messages sent!';
-        }
+//        $executed = RateLimiter::attempt(
+//            'send-message:' . $request->user()->id,
+//            $perMinute = 2,
+//            function() {
+////                dd('go here');
+//            }
+//        );
+//
+//        if (! $executed) {
+//            return 'Too many messages sent!';
+//        }
 //        $u = $request->getUser();
 //        dd($u);
 //        PodcastProcessed::dispatch($this->users);
