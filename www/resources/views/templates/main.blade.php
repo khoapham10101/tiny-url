@@ -1,78 +1,35 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>{{ config('app.name', 'User Management System') }}</title>
+<!doctype html>
+<html lang="{{ app()->getLocale() }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Laravel Broadcast Redis Socket io Tutorial - ItSolutionStuff.com</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Laravel Broadcast Redis Socket io Tutorial - ItSolutionStuff.com</h1>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <div id="notification"></div>
+</div>
+</body>
 
-        <!-- Styles -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<script>
+    window.laravel_echo_port='{{env("LARAVEL_ECHO_PORT")}}';
+</script>
+<script src="//{{ Request::getHost() }}:{{env('LARAVEL_ECHO_PORT')}}/socket.io/socket.io.js"></script>
+<script src="{{ url('/js/laravel-echo-setup.js') }}" type="text/javascript"></script>
 
-        <!-- JS -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-
-    </head>
-    <body class="antialiased">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <a class="navbar-brand" href="#">{{ config('app.name', 'User Management System ') }}</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="form-inline my-2 my-lg-0">
-                    @if (Route::has('login'))
-                        <div>
-                            @auth
-{{--                                <span class="text-wrap"> Hi {{ Auth::user()->name }}</span>--}}
-                                <span class="text-wrap"> {{ __('home.hi', ['name' => Auth::user()->name]) }}</span>
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
-                                <form style="display:none" method="POST" action="{{ route('logout') }}" id="logout-form">
-                                    @csrf
-                                </form>
-                            @else
-                                <a href="{{ route('login') }}">Log in</a>
-
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}">Register</a>
-                                @endif
-                            @endauth
-                            @include('templates.language_switcher')
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </nav>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
-                        </li>
-                        @if (Route::has('login'))
-                            @can('is-admin')
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin.users.index') }}">User</a>
-                                </li>
-                                <li class="nav-item">
-{{--                                    <a class="nav-link" href="{{ route('user.urls.all') }}">All Urls</a>--}}
-                                </li>
-                            @endcan
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('user.urls.index') }}">My Urls</a>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <main class="container">
-            @include('partials.alerts')
-            @yield('content')
-        </main>
-    </body>
+<script type="text/javascript">
+    var i = 0;
+    window.Echo.channel('user-channel')
+        .listen('.UserEvent', (data) => {
+            i++;
+            $("#notification").append('<div class="alert alert-success">'+i+'.'+data.title+'</div>');
+        });
+</script>
 </html>

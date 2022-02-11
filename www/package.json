@@ -21,6 +21,9 @@
         "sass-loader": "^12.4.0"
     },
     "dependencies": {
-        "@popperjs/core": "^2.11.2"
+        "@popperjs/core": "^2.11.2",
+        "laravel-echo": "^1.11.3",
+        "node-forge": "^1.2.1",
+        "socket.io-client": "^4.4.1"
     }
 }

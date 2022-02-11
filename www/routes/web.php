@@ -40,3 +40,8 @@ Route::get('/language/{locale}', function ($locale) {
 
 Route::get('/auth/google', [\App\Http\Controllers\User\GoogleController::class, 'redirectToGoogle'])->name('google-login');
 Route::get('/auth/google/callback', [\App\Http\Controllers\User\GoogleController::class, 'handleGoogleCallback'])->name('google-login-callback');
+
+Route::get('/t', function () {
+    event(new \App\Events\SendMessage());
+    dd('Event Run Successfully.');
+});
