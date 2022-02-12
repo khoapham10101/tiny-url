@@ -7,6 +7,7 @@ services:
         - WITH_XDEBUG=${WITH_XDEBUG}
     ports:
       - "8168:80"
+      - "6001:6001"
     env_file: .env
     environment:
       XDEBUG_CONFIG: "remote_host=localhost remote_connect_back=1"

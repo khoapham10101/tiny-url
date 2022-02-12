@@ -24,7 +24,7 @@ class SendMessage implements ShouldBroadcastNow
      */
     public function __construct()
     {
-
+        //
     }
 
     /**
