@@ -18,3 +18,5 @@ www/webpack.mix.js
 dump
 www/.env.local
 www/backups/
+storage
+www/log
